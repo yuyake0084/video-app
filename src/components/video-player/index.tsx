@@ -89,15 +89,9 @@ export const VideoPlayer = () => {
             videoRef.current.currentTime = currentTime;
             setCurrentTime(currentTime);
           }, [])}
-          onChange={useCallback((e: FormEvent<HTMLInputElement>) => {
+          onTouchEnd={(e) => {
             console.log(e);
-            if (!videoRef.current) return;
-
-            const currentTime = e.currentTarget.valueAsNumber;
-
-            videoRef.current.currentTime = currentTime;
-            setCurrentTime(currentTime);
-          }, [])}
+          }}
         />
 
         <Styled.SeekbarActive
