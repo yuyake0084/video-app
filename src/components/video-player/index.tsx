@@ -81,6 +81,7 @@ export const VideoPlayer = () => {
           min={0}
           max={duration}
           onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
+            console.log(e);
             if (!videoRef.current) return;
 
             const currentTime = e.currentTarget.valueAsNumber;
