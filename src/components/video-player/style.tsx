@@ -72,12 +72,14 @@ export const Seekbar = styled.input`
   }
 
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
     width: 0;
     height: 0;
   }
 
   &::-moz-range-thumb {
+    background-clip: padding-box;
     width: 0;
     height: 0;
     border: none;
