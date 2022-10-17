@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  height: calc(var(--1dvh, 1vh) * 100);
   height: 100dvh;
   background-color: #000;
 `;
