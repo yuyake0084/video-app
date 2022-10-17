@@ -35,6 +35,17 @@ export const SeekBox = styled.div`
   height: ${BAR_HEIGHT}px;
 `;
 
+export const PlayButtonBox = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Seekbar = styled.input`
   position: absolute;
   -webkit-appearance: none;

@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import Loading from "react-loading";
+import { Button, Loading } from "@nextui-org/react";
 
 import { Video } from "~/components/video";
 import * as Styled from "./style";
@@ -15,6 +15,7 @@ export const VideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [isLoadingMetadata, setIsLoadingMetadata] = useState(true);
+  const [isAutoPlayBlocked, setIsAutoPlayBlocked] = useState(false);
   const duration = videoRef.current?.duration ?? 0;
   const playRate = useMemo(() => {
     return (currentTime / duration) * 100;
@@ -22,7 +23,9 @@ export const VideoPlayer = () => {
 
   useEffect(() => {
     videoRef.current?.play().catch((err) => {
-      console.error(err);
+      console.log(err);
+      setIsAutoPlayBlocked(true);
+      setIsLoadingMetadata(false);
     });
   }, []);
 
@@ -52,8 +55,20 @@ export const VideoPlayer = () => {
         />
         {isLoadingMetadata && (
           <Styled.LoadingBox>
-            <Loading type="spin" />
+            <Loading />
           </Styled.LoadingBox>
+        )}
+        {isAutoPlayBlocked && (
+          <Styled.PlayButtonBox>
+            <Button
+              onClick={() => {
+                setIsAutoPlayBlocked(false);
+                videoRef.current?.play();
+              }}
+            >
+              再生
+            </Button>
+          </Styled.PlayButtonBox>
         )}
       </Styled.VideoBox>
 
