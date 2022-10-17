@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { Button, Loading } from "@nextui-org/react";
+import { Grid, Button, Loading } from "@nextui-org/react";
 
 import { Video } from "~/components/video";
 import * as Styled from "./style";
@@ -90,7 +90,6 @@ export const VideoPlayer = () => {
           min={0}
           max={duration}
           onInput={handleSeek}
-          // onChange={handleSeek}
         />
 
         <Styled.SeekbarActive
@@ -101,6 +100,19 @@ export const VideoPlayer = () => {
           <Styled.SliderThumb />
         </Styled.SeekbarActive>
       </Styled.SeekBox>
+
+      <Grid.Container gap={4} justify="center">
+        <Grid>
+          <Button
+            onTouchEnd={() => {
+              // @ts-ignore
+              videoRef.current.webkitEnterFullScreen();
+            }}
+          >
+            Fullscreen
+          </Button>
+        </Grid>
+      </Grid.Container>
     </Styled.Wrapper>
   );
 };
