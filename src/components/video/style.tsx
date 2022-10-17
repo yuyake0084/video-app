@@ -6,5 +6,9 @@ export const Wrapper = styled.div`
   & > video {
     width: 100%;
     vertical-align: bottom;
+
+    &::-webkit-media-controls {
+      display: none !important;
+    }
   }
 `;
