@@ -16,23 +16,21 @@ export const Wrapper = styled.div`
 export const VideoBox = styled.div``;
 
 export const SeekBox = styled.div`
-  width: calc(100% - 24px);
+  position: relative;
+  width: 100%;
   height: ${BAR_HEIGHT}px;
-  padding: 12px;
-  box-sizing: border-box;
 `;
 
 export const Seekbar = styled.input`
+  position: absolute;
   -webkit-appearance: none;
   appearance: none;
-  cursor: pointer;
-  position: absolute;
   box-sizing: border-box;
   cursor: pointer;
   background: #d4d4d4;
   width: 100%;
   height: ${BAR_HEIGHT}px;
-  box-sizing: border-box;
+  border-radius: 12px;
 
   &::before {
     display: ${isTouchDisplay ? "none" : "block"};
@@ -50,15 +48,16 @@ export const Seekbar = styled.input`
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
     width: 0;
     height: 0;
   }
+
   &::-moz-range-thumb {
     width: 0;
     height: 0;
     border: none;
   }
+
   &::-moz-focus-outer {
     border: 0;
   }
