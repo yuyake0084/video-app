@@ -1,4 +1,11 @@
-import { FormEvent, useCallback, useMemo, useRef, useState } from "react";
+import {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Loading from "react-loading";
 
 import { Video } from "~/components/video";
@@ -12,6 +19,12 @@ export const VideoPlayer = () => {
   const playRate = useMemo(() => {
     return (currentTime / duration) * 100;
   }, [duration, currentTime]);
+
+  useEffect(() => {
+    videoRef.current?.play().catch((err) => {
+      console.error(err);
+    });
+  }, []);
 
   return (
     <Styled.Wrapper>
