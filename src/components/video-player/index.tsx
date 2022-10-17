@@ -38,6 +38,27 @@ export const VideoPlayer = () => {
     setCurrentTime(currentTime);
   }, []);
 
+  const onFullscreen = useCallback(async () => {
+    const videoElement = videoRef.current;
+
+    if (!videoElement) return;
+
+    const requestFullscreen =
+      videoElement.requestFullscreen ||
+      videoElement.webkitRequestFullscreen ||
+      videoElement.webkitEnterFullscreen;
+
+    if (typeof requestFullscreen === undefined) return;
+
+    try {
+      await requestFullscreen.call(videoElement);
+    } catch (e) {
+      if (e instanceof Error) {
+        console.warn(e);
+      }
+    }
+  }, []);
+
   return (
     <Styled.Wrapper>
       <Styled.VideoBox>
@@ -101,14 +122,9 @@ export const VideoPlayer = () => {
         </Styled.SeekbarActive>
       </Styled.SeekBox>
 
-      <Grid.Container gap={4} justify="center">
+      <Grid.Container justify="center" style={{ marginTop: 40 }}>
         <Grid>
-          <Button
-            onTouchEnd={() => {
-              // @ts-ignore
-              videoRef.current.webkitEnterFullScreen();
-            }}
-          >
+          <Button auto onClick={onFullscreen} onTouchEnd={onFullscreen}>
             Fullscreen
           </Button>
         </Grid>
