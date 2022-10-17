@@ -74,8 +74,8 @@ export const Seekbar = styled.input`
   &::-webkit-slider-thumb {
     appearance: none;
     background-clip: padding-box;
-    width: 0;
-    height: 0;
+    width: ${THUMB_SIZE}px;
+    height: ${THUMB_SIZE}px;
   }
 
   &::-moz-range-thumb {
