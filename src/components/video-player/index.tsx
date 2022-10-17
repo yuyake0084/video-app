@@ -37,7 +37,7 @@ export const VideoPlayer = () => {
           src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
           muted
           autoPlay
-          onClick={() => {
+          onPress={() => {
             if (videoRef.current?.paused) {
               videoRef.current.play();
             } else {
@@ -61,7 +61,7 @@ export const VideoPlayer = () => {
         {isAutoPlayBlocked && (
           <Styled.PlayButtonBox>
             <Button
-              onClick={() => {
+              onPress={() => {
                 setIsAutoPlayBlocked(false);
                 videoRef.current?.play();
               }}
