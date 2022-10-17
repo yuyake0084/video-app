@@ -72,10 +72,12 @@ export const Seekbar = styled.input`
   }
 
   &::-webkit-slider-thumb {
-    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
     background-clip: padding-box;
     width: ${THUMB_SIZE}px;
     height: ${THUMB_SIZE}px;
+    opacity: 0;
   }
 
   &::-moz-range-thumb {
