@@ -61,7 +61,8 @@ export const VideoPlayer = () => {
         {isAutoPlayBlocked && (
           <Styled.PlayButtonBox>
             <Button
-              onPress={() => {
+              onTouchEnd={(e) => {
+                e.preventDefault();
                 setIsAutoPlayBlocked(false);
                 videoRef.current?.play();
               }}
