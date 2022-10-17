@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { RiFullscreenLine } from "react-icons/ri";
 import { Grid, Button, Loading } from "@nextui-org/react";
 
 import { Video } from "~/components/video";
@@ -61,74 +62,80 @@ export const VideoPlayer = () => {
 
   return (
     <Styled.Wrapper>
-      <Styled.VideoBox>
-        <Video
-          ref={videoRef}
-          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          muted
-          autoPlay
-          playsInline
-          onClick={() => {
-            if (videoRef.current?.paused) {
-              videoRef.current.play();
-            } else {
-              videoRef.current?.pause();
-            }
-          }}
-          onPlaying={useCallback(() => {
-            setIsLoadingMetadata(false);
-          }, [])}
-          onTimeUpdate={(e) => {
-            const { currentTime } = e.currentTarget;
+      <div>
+        <Styled.VideoBox>
+          <Video
+            ref={videoRef}
+            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            muted
+            autoPlay
+            playsInline
+            onClick={() => {
+              if (videoRef.current?.paused) {
+                videoRef.current.play();
+              } else {
+                videoRef.current?.pause();
+              }
+            }}
+            onPlaying={useCallback(() => {
+              setIsLoadingMetadata(false);
+            }, [])}
+            onTimeUpdate={(e) => {
+              const { currentTime } = e.currentTarget;
 
-            setCurrentTime(Math.floor(currentTime));
-          }}
-        />
-        {isLoadingMetadata && (
-          <Styled.LoadingBox>
-            <Loading />
-          </Styled.LoadingBox>
-        )}
-        {isAutoPlayBlocked && (
-          <Styled.PlayButtonBox>
+              setCurrentTime(Math.floor(currentTime));
+            }}
+          />
+          {isLoadingMetadata && (
+            <Styled.LoadingBox>
+              <Loading />
+            </Styled.LoadingBox>
+          )}
+          {isAutoPlayBlocked && (
+            <Styled.PlayButtonBox>
+              <Button
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  setIsAutoPlayBlocked(false);
+                  videoRef.current?.play();
+                }}
+              >
+                再生
+              </Button>
+            </Styled.PlayButtonBox>
+          )}
+
+          <Styled.Controller>
             <Button
-              onTouchEnd={(e) => {
-                e.preventDefault();
-                setIsAutoPlayBlocked(false);
-                videoRef.current?.play();
+              auto
+              icon={<RiFullscreenLine size={20} />}
+              css={{
+                background: "#000",
               }}
-            >
-              再生
-            </Button>
-          </Styled.PlayButtonBox>
-        )}
-      </Styled.VideoBox>
+              onClick={onFullscreen}
+              onTouchEnd={onFullscreen}
+            />
+          </Styled.Controller>
+        </Styled.VideoBox>
 
-      <Styled.SeekBox>
-        <Styled.Seekbar
-          type="range"
-          value={currentTime}
-          min={0}
-          max={duration}
-          onInput={handleSeek}
-        />
+        <Styled.SeekBox>
+          <Styled.Seekbar
+            type="range"
+            value={currentTime}
+            min={0}
+            max={duration}
+            onInput={handleSeek}
+          />
 
-        <Styled.SeekbarActive
-          style={{
-            width: `${playRate || 0}%`,
-          }}
-        >
-          <Styled.SliderThumb />
-        </Styled.SeekbarActive>
-      </Styled.SeekBox>
-
-      <Grid.Container justify="center" style={{ marginTop: 40 }}>
-        <Grid>
-          <Button auto onClick={onFullscreen} onTouchEnd={onFullscreen}>
-            Fullscreen
-          </Button>
-        </Grid>
-      </Grid.Container>
+          <Styled.SeekbarActive
+            style={{
+              width: `${playRate || 0}%`,
+            }}
+          >
+            <Styled.SliderThumb />
+          </Styled.SeekbarActive>
+        </Styled.SeekBox>
+      </div>
     </Styled.Wrapper>
   );
 };

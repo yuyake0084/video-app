@@ -8,6 +8,9 @@ const isTouchDisplay =
   typeof window !== "undefined" && typeof window.ontouchend !== "undefined";
 
 export const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   height: 100dvh;
   background-color: #000;
@@ -44,6 +47,12 @@ export const PlayButtonBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const Controller = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
 `;
 
 export const Seekbar = styled.input`
