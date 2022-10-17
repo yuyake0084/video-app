@@ -29,6 +29,15 @@ export const VideoPlayer = () => {
     });
   }, []);
 
+  const handleSeek = useCallback((e: FormEvent<HTMLInputElement>) => {
+    if (!videoRef.current) return;
+
+    const currentTime = e.currentTarget.valueAsNumber;
+
+    videoRef.current.currentTime = currentTime;
+    setCurrentTime(currentTime);
+  }, []);
+
   return (
     <Styled.Wrapper>
       <Styled.VideoBox>
@@ -80,18 +89,8 @@ export const VideoPlayer = () => {
           value={currentTime}
           min={0}
           max={duration}
-          onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
-            console.log(e);
-            if (!videoRef.current) return;
-
-            const currentTime = e.currentTarget.valueAsNumber;
-
-            videoRef.current.currentTime = currentTime;
-            setCurrentTime(currentTime);
-          }, [])}
-          onTouchEnd={(e) => {
-            console.log(e);
-          }}
+          onInput={handleSeek}
+          onChange={handleSeek}
         />
 
         <Styled.SeekbarActive
