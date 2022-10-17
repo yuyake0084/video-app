@@ -77,13 +77,14 @@ export const Seekbar = styled.input`
     background-clip: padding-box;
     width: ${THUMB_SIZE}px;
     height: ${THUMB_SIZE}px;
-    background-color: transparent;
+    opacity: 0;
   }
 
   &::-moz-range-thumb {
     background-clip: padding-box;
-    width: 0;
-    height: 0;
+    width: ${THUMB_SIZE}px;
+    height: ${THUMB_SIZE}px;
+    opacity: 0;
     border: none;
   }
 
