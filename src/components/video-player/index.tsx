@@ -90,7 +90,7 @@ export const VideoPlayer = () => {
           min={0}
           max={duration}
           onInput={handleSeek}
-          onChange={handleSeek}
+          // onChange={handleSeek}
         />
 
         <Styled.SeekbarActive
