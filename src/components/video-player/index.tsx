@@ -11,42 +11,43 @@ export const VideoPlayer = () => {
 
   return (
     <Styled.Wrapper>
-      <Video
-        ref={videoRef}
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-        muted
-        autoPlay
-        onTimeUpdate={(e) => {
-          const { currentTime } = e.currentTarget;
+      <Styled.VideoBox>
+        <Video
+          ref={videoRef}
+          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+          muted
+          autoPlay
+          onTimeUpdate={(e) => {
+            const { currentTime } = e.currentTarget;
 
-          setCurrentTime(Math.floor(currentTime));
-        }}
-      />
-
-      <Styled.SeekWrapper>
-        <Styled.Seekbar
-          type="range"
-          value={currentTime}
-          min={0}
-          max={duration}
-          onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
-            if (!videoRef.current) return;
-
-            const currentTime = e.currentTarget.valueAsNumber;
-
-            videoRef.current.currentTime = currentTime;
-            setCurrentTime(currentTime);
-          }, [])}
-        />
-
-        <Styled.SeekbarActive
-          style={{
-            width: `${playRate || 0}%`,
+            setCurrentTime(Math.floor(currentTime));
           }}
-        >
-          <Styled.SliderThumb />
-        </Styled.SeekbarActive>
-      </Styled.SeekWrapper>
+        />
+        <Styled.SeekBox>
+          <Styled.Seekbar
+            type="range"
+            value={currentTime}
+            min={0}
+            max={duration}
+            onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
+              if (!videoRef.current) return;
+
+              const currentTime = e.currentTarget.valueAsNumber;
+
+              videoRef.current.currentTime = currentTime;
+              setCurrentTime(currentTime);
+            }, [])}
+          />
+
+          <Styled.SeekbarActive
+            style={{
+              width: `${playRate || 0}%`,
+            }}
+          >
+            <Styled.SliderThumb />
+          </Styled.SeekbarActive>
+        </Styled.SeekBox>
+      </Styled.VideoBox>
     </Styled.Wrapper>
   );
 };

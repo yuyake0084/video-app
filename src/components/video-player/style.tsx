@@ -8,12 +8,15 @@ const isTouchDisplay =
   typeof window !== "undefined" && typeof window.ontouchend !== "undefined";
 
 export const Wrapper = styled.div`
-  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000;
 `;
 
-export const SeekWrapper = styled.div`
-  position: relative;
-  width: 100%;
+export const VideoBox = styled.div``;
+
+export const SeekBox = styled.div`
+  width: calc(100% - 24px);
   height: ${BAR_HEIGHT}px;
   padding: 12px;
   box-sizing: border-box;
