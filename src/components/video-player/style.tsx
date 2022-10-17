@@ -13,7 +13,21 @@ export const Wrapper = styled.div`
   background-color: #000;
 `;
 
-export const VideoBox = styled.div``;
+export const VideoBox = styled.div`
+  position: relative;
+`;
+
+export const LoadingBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+`;
 
 export const SeekBox = styled.div`
   position: relative;

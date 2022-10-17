@@ -1,11 +1,13 @@
 import { FormEvent, useCallback, useMemo, useRef, useState } from "react";
-import { Video } from "~/components/video";
+import Loading from "react-loading";
 
+import { Video } from "~/components/video";
 import * as Styled from "./style";
 
 export const VideoPlayer = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const [isLoadingMetadata, setIsLoadingMetadata] = useState(true);
   const duration = videoRef.current?.duration ?? 0;
   const playRate = useMemo(() => {
     return (currentTime / duration) * 100;
@@ -26,37 +28,46 @@ export const VideoPlayer = () => {
               videoRef.current?.pause();
             }
           }}
+          onPlaying={useCallback(() => {
+            setIsLoadingMetadata(false);
+          }, [])}
           onTimeUpdate={(e) => {
             const { currentTime } = e.currentTarget;
 
             setCurrentTime(Math.floor(currentTime));
           }}
         />
-        <Styled.SeekBox>
-          <Styled.Seekbar
-            type="range"
-            value={currentTime}
-            min={0}
-            max={duration}
-            onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
-              if (!videoRef.current) return;
-
-              const currentTime = e.currentTarget.valueAsNumber;
-
-              videoRef.current.currentTime = currentTime;
-              setCurrentTime(currentTime);
-            }, [])}
-          />
-
-          <Styled.SeekbarActive
-            style={{
-              width: `${playRate || 0}%`,
-            }}
-          >
-            <Styled.SliderThumb />
-          </Styled.SeekbarActive>
-        </Styled.SeekBox>
+        {isLoadingMetadata && (
+          <Styled.LoadingBox>
+            <Loading type="spin" />
+          </Styled.LoadingBox>
+        )}
       </Styled.VideoBox>
+
+      <Styled.SeekBox>
+        <Styled.Seekbar
+          type="range"
+          value={currentTime}
+          min={0}
+          max={duration}
+          onInput={useCallback((e: FormEvent<HTMLInputElement>) => {
+            if (!videoRef.current) return;
+
+            const currentTime = e.currentTarget.valueAsNumber;
+
+            videoRef.current.currentTime = currentTime;
+            setCurrentTime(currentTime);
+          }, [])}
+        />
+
+        <Styled.SeekbarActive
+          style={{
+            width: `${playRate || 0}%`,
+          }}
+        >
+          <Styled.SliderThumb />
+        </Styled.SeekbarActive>
+      </Styled.SeekBox>
     </Styled.Wrapper>
   );
 };
