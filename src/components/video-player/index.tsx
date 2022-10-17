@@ -37,6 +37,7 @@ export const VideoPlayer = () => {
           src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
           muted
           autoPlay
+          playsInline
           onClick={() => {
             if (videoRef.current?.paused) {
               videoRef.current.play();
