@@ -1,10 +1,14 @@
 import type { NextPage } from "next";
-import { FormEvent, useCallback, useRef, useState } from "react";
-import { Video } from "~/components/video";
+import { EpisodeList } from "~/components/episode-list";
 import { VideoPlayer } from "~/components/video-player";
 
 const Home: NextPage = () => {
-  return <VideoPlayer />;
+  return (
+    <div>
+      <VideoPlayer />
+      <EpisodeList />
+    </div>
+  );
 };
 
 export default Home;
