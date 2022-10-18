@@ -86,7 +86,11 @@ export const VideoPlayer = () => {
                 videoRef.current?.pause();
               }
             }}
+            onLoadedMetadata={(e) => {
+              console.log("loadedmetadata", e);
+            }}
             onPlaying={useCallback(() => {
+              console.log("playing");
               setIsLoadingMetadata(false);
             }, [])}
             onTimeUpdate={(e) => {
