@@ -51,6 +51,9 @@ export const PlayButtonBox = styled.div`
 `;
 
 export const Controller = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 8px;
   position: absolute;
   top: 20px;
   right: 20px;

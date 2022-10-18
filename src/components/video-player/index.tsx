@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { RiFullscreenLine } from "react-icons/ri";
+import { CgMiniPlayer } from "react-icons/cg";
 import { Grid, Button, Loading } from "@nextui-org/react";
 
 import { Video } from "~/components/video";
@@ -38,6 +39,14 @@ export const VideoPlayer = () => {
     videoRef.current.currentTime = currentTime;
     setCurrentTime(currentTime);
   }, []);
+
+  const onMiniPlayer = () => {
+    const videoElement = videoRef.current;
+
+    if (!videoElement) return;
+
+    videoElement.requestPictureInPicture();
+  };
 
   const onFullscreen = useCallback(async () => {
     const videoElement = videoRef.current;
@@ -106,6 +115,15 @@ export const VideoPlayer = () => {
           )}
 
           <Styled.Controller>
+            <Button
+              auto
+              icon={<CgMiniPlayer size={20} />}
+              css={{
+                background: "#000",
+              }}
+              onClick={onMiniPlayer}
+              onTouchEnd={onMiniPlayer}
+            />
             <Button
               auto
               icon={<RiFullscreenLine size={20} />}
