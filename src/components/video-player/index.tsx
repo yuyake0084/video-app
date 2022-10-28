@@ -96,6 +96,8 @@ export const VideoPlayer = () => {
             onTimeUpdate={(e) => {
               const { currentTime } = e.currentTarget;
 
+              console.log(currentTime);
+
               setCurrentTime(Math.floor(currentTime));
             }}
           />
