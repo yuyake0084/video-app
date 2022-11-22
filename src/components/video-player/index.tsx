@@ -23,6 +23,8 @@ export const VideoPlayer = () => {
     return (currentTime / duration) * 100;
   }, [duration, currentTime]);
 
+  console.log(["hoge", "fuga"].at(0));
+
   useEffect(() => {
     videoRef.current?.play().catch((err) => {
       console.log(err);
